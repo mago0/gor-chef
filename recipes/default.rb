@@ -10,24 +10,23 @@
 
 include_recipe "golang::default"
 
-git "/usr/local/src/gor" do
-  repository node['gor']['distribution']['repository']
-  reference node['gor']['distribution']['revision']
-  action :sync
-  notifies :run, 'execute[compile-gor-source]', :immediately
-  not_if do ::File.exists?("/usr/local/bin/gor") end
+source_go_profile = "source /etc/profile.d/golang.sh"
+
+bash "build-gor" do
+  user "root"
+  group "root"
+  code <<-EOH
+  #{source_go_profile}
+  go get github.com/buger/gor
+  cd $GOPATH/src/github.com/buger/gor
+  go build
+  EOH
+  notifies :run, 'bash[move-bin-to-folder]', :immediately
+  not_if { ::File.exists?("/usr/local/bin/gor") }
 end
 
-execute "compile-gor-source" do
-  cwd "/usr/local/src/gor"
-  command "go build gor.go"
-  action :nothing
-  notifies :run, 'execute[move-bin-to-folder]', :immediately
-end
-
-execute "move-bin-to-folder" do
-  cwd "/usr/local/src/gor"
-  command "mv ./gor /usr/local/bin/gor"
+bash "move-bin-to-folder" do
+  code "#{source_go_profile}; mv $GOPATH/src/github.com/buger/gor/gor /usr/local/bin/gor"
   action :nothing
 end
 
