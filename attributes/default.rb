@@ -8,8 +8,5 @@
 #
 # See the Readme for details.
 
-default['gor']['role']            = 'listen'            # or 'replay'
-default['gor']['listen']['port']  = 80                  # port to listen on for http traffic  
-default['gor']['forward']['host'] = node[:ip_address]   # hostname or ip to forward to
-default['gor']['replay']['host']  = node[:ip_address]   # hostname or ip to replay on
-default['gor']['replay']['port']  = 28020               # port for the replay server
+default['gor']['distribution']['repository'] = 'https://github.com/buger/gor.git'
+default['gor']['distribution']['reference'] = '09f9cac6fb671e1571916ee721319afee9e93e28'

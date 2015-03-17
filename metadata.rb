@@ -6,6 +6,7 @@
 #
 # Copyright 2012-2013, Wouter de Vos
 #
+name             "gor"
 maintainer       "Wouter de Vos | Springest"
 maintainer_email "wouter@springest.com"
 license          "MIT"
@@ -15,3 +16,5 @@ version          "0.1.0"
 
 provides "gor"
 recipe   "gor",  "Install the Gor binaries."
+
+depends  "golang", "~> 1.5.0"
