@@ -8,6 +8,8 @@
 # Copyright 2012-2013, Wouter de Vos
 #
 
+package "libpcap0.8-dev"
+
 include_recipe "golang::default"
 
 source_go_profile = "source /etc/profile.d/golang.sh"
