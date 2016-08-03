@@ -17,4 +17,4 @@ version          "0.1.0"
 provides "gor"
 recipe   "gor",  "Install the Gor binaries."
 
-depends  "golang", "~> 1.5.0"
+depends  "golang", "~> 1.7.0"
